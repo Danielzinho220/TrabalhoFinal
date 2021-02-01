@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Produt {
 
@@ -16,27 +20,29 @@ public class Produt {
 			// Criar o arquivo "agenda.txt" na pasta do projeto
 			arquivo = new FileOutputStream("agenda.txt");
 
-			// Criação de 3 objetos da classe Agenda
-			Agenda a1 = new Agenda("Douglas", "d@email", "985491589", 35);
-			Agenda a2 = new Agenda("Gabriela", "gab@email", "98747774", 37);
-			Agenda a3 = new Agenda("Bruno", "br@email", "96546532", 27);
-
+			// Criação de 3 objetos da classe
+			Scanner sc = new Scanner(System.in);
+			   
+			Produto a1 = new Produto();
+			a1 = sc.nextLine();
+			Produto a2 = new Produto();
+			a2 = sc.nextLine();
+			Produto a3 = new Produto();
+			a3 = sc.nextLine();
 			// Juntar todos os valores do objeto "a1" em uma String (texto) só
-			String valoresA1 = a1.getNome() + ";" + a1.getEmail() + ";" + a1.getTelefone() + ";" + a1.getIdade() + "\n";
+			String valoresA1 = a1.getNome() + ";" + "\n";
 
 			// Escrever os valores do objeto "a1" no "arquivo"
 			arquivo.write(valoresA1.getBytes());
-			// Ou, em duas etapas
-			// byte[] val1 = valoresA1.getBytes();
-			// arquivo.write(val1);
+			
 
 			// Juntar os valores do objeto "a2" em uma única String (texto)
-			String valoresA2 = a2.getNome() + ";" + a2.getEmail() + ";" + a2.getTelefone() + ";" + a2.getIdade() + "\n";
+			String valoresA2 = a2.getPreco() + ";" + "\n";
 			// Escrever os valores do objeto "a2" no "arquivo"
 			arquivo.write(valoresA2.getBytes());
 
 			// Juntar os valores do objeto "a3" em uma única String (texto)
-			String valoresA3 = a3.getNome() + ";" + a3.getEmail() + ";" + a3.getTelefone() + ";" + a3.getIdade() + "\n";
+			String valoresA3 = a3.getQuantidade () + ";" + "\n";
 			// Escrever os valores do objeto "a3" no "arquivo"
 			arquivo.write(valoresA3.getBytes());
 
@@ -95,17 +101,7 @@ public class Produt {
 				// Se "linhaCopia" não for igual a "", quer dizer que encontrou
 				System.out.println(linhaCopia);
 
-				// Dividir a "linhaCopia" separando os valores com base no ;
-				// Para separar iremos usar o método split(). O resultado
-				// do split é sempre um vetor de String
-				String vet[] = linhaCopia.split(";");
-
-				// Como os valores forem gravados na sequência: Nome, Email,
-				// Telefone e Idade, estes estarão nessa mesma sequência no vet
-				System.out.println("Nome: " + vet[0]);
-				System.out.println("E-mail: " + vet[1]);
-				System.out.println("Telefone: " + vet[2]);
-				System.out.println("Idade: " + vet[3]);
+				
 			}
 			// Fechar (liberar recurso) do objeto "sc" (Scanner)
 			sc.close();
