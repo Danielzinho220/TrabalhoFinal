@@ -17,8 +17,8 @@ public class Geral {
 		BufferedReader conversao = null;
 
 		try {
-			// Criar o arquivo "agenda.txt" na pasta do projeto
-			arquivo = new FileOutputStream("agenda.txt");
+			// Criar o arquivo "Produtos.txt" na pasta do projeto
+			arquivo = new FileOutputStream("Produtos.txt");
 
 			// Criação de 3 objetos da classe
 			Scanner sc = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class Geral {
 			System.out.println("Objetos gravados com sucesso no arquivo.");
               
 			// Início da leitura dos valores de dentro do arquivo
-			leitura = new FileInputStream("agenda.txt");
+			leitura = new FileInputStream("Produtos.txt");
 
 			// Utilização da classe InputStreamReader para recuperar todo o
 			// conteúdo escrito dentro do arquivo "agenda.txt"
@@ -58,7 +58,7 @@ public class Geral {
 
 			Scanner teclado = new Scanner(System.in);
 			System.out.println("Qual nome deseja buscar?");
-			String nome1 = sc.next();
+			 nome = sc.next();
 
 			// Criação de um objeto String para armazenar uma cópia do
 			// valor da linha caso encontre o nome pesquisado
@@ -76,7 +76,7 @@ public class Geral {
 				// Verificar se (IF) nessa "linha" existe o "nome" procurado
 				// O método contains() indica se existe ou não o valor passado
 				// como parâmetro dentro do parênteses
-				if (linha.contains(nome1)) {
+				if (linha.contains(nome)) {
 					// Se a linha contém o nome procurado, copiamos a linha
 					linhaCopia = linha;
 				} else {
@@ -91,7 +91,7 @@ public class Geral {
 			// equals() e passar um texto (String)
 			if (linhaCopia.equals("")) {
 				// Se "linhaCopia" for igual (equals) ""
-				System.out.println("O nome " + nome1 + " não foi encontrado");
+				System.out.println("O nome " + nome + " não foi encontrado");
 			} else {
 				// Se "linhaCopia" não for igual a "", quer dizer que encontrou
 				System.out.println(linhaCopia);
