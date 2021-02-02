@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class Produt {
+public class Geral {
 
 	public static void main(String[] args) {
-		// Classe FileOutputStream para criar o arquivo
+
 		FileOutputStream arquivo = null;
-		// Classe FileInputStream para ler o conteúdo do arquivo
+
 		FileInputStream leitura = null;
-		// Classe BufferedReader para recuperar o conteúdo em texto
+
 		BufferedReader conversao = null;
 
 		try {
@@ -22,32 +22,26 @@ public class Produt {
 
 			// Criação de 3 objetos da classe
 			Scanner sc = new Scanner(System.in);
-			   
-			Produto a1 = new Produto();
-			a1 = sc.nextLine();
-			Produto a2 = new Produto();
-			a2 = sc.nextLine();
-			Produto a3 = new Produto();
-			a3 = sc.nextLine();
-			// Juntar todos os valores do objeto "a1" em uma String (texto) só
-			String valoresA1 = a1.getNome() + ";" + "\n";
-
-			// Escrever os valores do objeto "a1" no "arquivo"
-			arquivo.write(valoresA1.getBytes());
+			
+			System.out.println("Digite o código");
+			int codigo = sc.nextInt();
+			
+			System.out.println("Digite o nome");
+			String nome = sc.next();
+			
+			System.out.println("Digite o preço");
+			double preco = sc.nextDouble();
+			
+			System.out.println("Digite a quantidade");
+			int quantidade = sc.nextInt();
+			
+			Produto p = new Produto(nome, preco, quantidade, codigo);
+			
+			
 			
 
-			// Juntar os valores do objeto "a2" em uma única String (texto)
-			String valoresA2 = a2.getPreco() + ";" + "\n";
-			// Escrever os valores do objeto "a2" no "arquivo"
-			arquivo.write(valoresA2.getBytes());
-
-			// Juntar os valores do objeto "a3" em uma única String (texto)
-			String valoresA3 = a3.getQuantidade () + ";" + "\n";
-			// Escrever os valores do objeto "a3" no "arquivo"
-			arquivo.write(valoresA3.getBytes());
-
 			System.out.println("Objetos gravados com sucesso no arquivo.");
-
+              
 			// Início da leitura dos valores de dentro do arquivo
 			leitura = new FileInputStream("agenda.txt");
 
@@ -62,26 +56,27 @@ public class Produt {
 			// com a classe BufferedReader (criado no começo do código)
 			conversao = new BufferedReader(todoConteudo);
 
-			// Criação do Scanner para ler um valor pelo teclado
-			Scanner sc = new Scanner(System.in);
+			Scanner teclado = new Scanner(System.in);
 			System.out.println("Qual nome deseja buscar?");
-			String nome = sc.next();
+			String nome1 = sc.next();
 
 			// Criação de um objeto String para armazenar uma cópia do
 			// valor da linha caso encontre o nome pesquisado
 			String linhaCopia = ""; // Linha pode começar em branco para facilitar
-									// a conferência caso tenha encontrado ou não
-
+			// a conferência caso tenha encontrado ou não
+			
+			sc.close();
+			
 			// Utilização da repetição "while" que irá percorrer o arquivo
 			// enquanto houverem linhas para serem lidas
 			while (conversao.ready() == true) { // Enquanto houverem linhas
 				// Pegamos o valor da linha atual que está sendo lida
 				String linha = conversao.readLine();
-
+				
 				// Verificar se (IF) nessa "linha" existe o "nome" procurado
 				// O método contains() indica se existe ou não o valor passado
 				// como parâmetro dentro do parênteses
-				if (linha.contains(nome)) {
+				if (linha.contains(nome1)) {
 					// Se a linha contém o nome procurado, copiamos a linha
 					linhaCopia = linha;
 				} else {
@@ -96,15 +91,14 @@ public class Produt {
 			// equals() e passar um texto (String)
 			if (linhaCopia.equals("")) {
 				// Se "linhaCopia" for igual (equals) ""
-				System.out.println("O nome " + nome + " não foi encontrado");
+				System.out.println("O nome " + nome1 + " não foi encontrado");
 			} else {
 				// Se "linhaCopia" não for igual a "", quer dizer que encontrou
 				System.out.println(linhaCopia);
 
-				
 			}
 			// Fechar (liberar recurso) do objeto "sc" (Scanner)
-			sc.close();
+			teclado.close();
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Não foi possível criar o arquivo.");
@@ -113,7 +107,7 @@ public class Produt {
 			System.out.println("Não foi possível escrever no arquivo.");
 			e.printStackTrace();
 		} finally {
-			// Encerrar os recursos usados
+
 			try {
 				arquivo.close();
 				leitura.close();
@@ -121,6 +115,7 @@ public class Produt {
 			} catch (IOException e) {
 				System.out.println("Não foi possível finalizar.");
 				e.printStackTrace();
+				
 			}
 		}
 	}
