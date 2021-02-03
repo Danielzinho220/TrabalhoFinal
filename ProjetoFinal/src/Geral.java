@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+     import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,8 +23,6 @@ public class Geral {
 			// Criação de 3 objetos da classe
 			Scanner sc = new Scanner(System.in);
 			
-			System.out.println("Digite o código");
-			int codigo = sc.nextInt();
 			
 			System.out.println("Digite o nome");
 			String nome = sc.next();
@@ -32,11 +30,19 @@ public class Geral {
 			System.out.println("Digite o preço");
 			double preco = sc.nextDouble();
 			
+			
 			System.out.println("Digite a quantidade");
 			int quantidade = sc.nextInt();
 			
+			System.out.println("Digite o código");
+			int codigo = sc.nextInt();
+			
 			Produto p = new Produto(nome, preco, quantidade, codigo);
 			
+			arquivo.write((nome+";").getBytes());
+			arquivo.write((preco+";").getBytes());
+			arquivo.write((quantidade+";").getBytes());
+			arquivo.write((codigo+";").getBytes());
 			
 			
 

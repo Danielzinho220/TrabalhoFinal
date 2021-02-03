@@ -9,6 +9,7 @@ public class Produto {
 
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -17,6 +18,7 @@ public class Produto {
 
 		return preco;
 	}
+
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
@@ -25,6 +27,7 @@ public class Produto {
 
 		return quantidade;
 	}
+
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
@@ -33,11 +36,10 @@ public class Produto {
 
 		return codigo;
 	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
-
 
 	public Produto(String nome, double preco, int quantidade, int codigo) {
 		this.nome = nome;
