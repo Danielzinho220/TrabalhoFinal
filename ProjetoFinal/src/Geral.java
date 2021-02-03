@@ -18,32 +18,30 @@ public class Geral {
 
 		try {
 			// Criar o arquivo "Produtos.txt" na pasta do projeto
-			arquivo = new FileOutputStream("Produtos.txt");
+			arquivo = new FileOutputStream("Produtos.txt",true);
 
 			// Criação de 3 objetos da classe
 			Scanner sc = new Scanner(System.in);
 			
 			
-			System.out.println("Digite o nome");
+			System.out.println("Digite o nome do Produto:");
 			String nome = sc.next();
-			
-			System.out.println("Digite o preço");
-			double preco = sc.nextDouble();
-			
-			
-			System.out.println("Digite a quantidade");
-			int quantidade = sc.nextInt();
-			
-			System.out.println("Digite o código");
-			int codigo = sc.nextInt();
-			
-			Produto p = new Produto(nome, preco, quantidade, codigo);
-			
 			arquivo.write((nome+";").getBytes());
+			
+			System.out.println("Digite o preço:");
+			double preco = sc.nextDouble();
 			arquivo.write((preco+";").getBytes());
+			
+			System.out.println("Digite a quantidade:");
+			int quantidade = sc.nextInt();
 			arquivo.write((quantidade+";").getBytes());
+			
+			System.out.println("Digite o código:");
+			int codigo = sc.nextInt();
 			arquivo.write((codigo+";").getBytes());
 			
+			
+			Produto p = new Produto(nome, preco, quantidade, codigo);
 			
 
 			System.out.println("Objetos gravados com sucesso no arquivo.");
