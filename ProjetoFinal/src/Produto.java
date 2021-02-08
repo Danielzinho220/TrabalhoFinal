@@ -1,4 +1,4 @@
-    
+
 public class Produto {
 	private String nome;
 	private double preco;
@@ -46,6 +46,10 @@ public class Produto {
 		this.preco = preco;
 		this.quantidade = quantidade;
 		this.codigo = codigo;
+	}
+
+	public Produto() {
+		// TODO Auto-generated constructor stub
 	}
 
 }

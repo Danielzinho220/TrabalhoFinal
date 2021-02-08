@@ -1,1 +1,10 @@
-banana;12.0;32;22;banana;22.0;4;10;mação;6.0;3;4;
+banana;22.0;5;100;
+mação;7.9;4;99;
+coca;7.9;3;98;
+coco;9.9;3;94;
+desodorante;12.9;4;93;
+sabonete;6.2;4;92;
+condicionador;12.4;2;91;
+yakute;5.1;5;90;
+açucar;7.4;2;89;
+bombom;3.4;1;88;

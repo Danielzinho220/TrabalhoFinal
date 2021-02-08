@@ -1,127 +1,166 @@
-     import java.io.BufferedReader;
+
+import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Geral {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		int opcao = 0;
+		Scanner nr = new Scanner(System.in);
+		Produto p = new Produto();
+		do {
+			System.out.println("+-----------------------------------------+");
+			System.out.println("+--------- Escolha uma opção abaixo-------+");
+			System.out.println("+                                         +");
+			System.out.println("+  1- Cadastrar produto                   +");
+			System.out.println("+  2- Buscar um produto                   +");
+			System.out.println("+  3- Listar todos produtos               +");
+			System.out.println("+  4- Atualizar produto                   +");
+			System.out.println("+  5- sair                                +");
+			System.out.println("+                                         +");
+			System.out.println("+-----------------------------------------+");
 
-		FileOutputStream arquivo = null;
-
-		FileInputStream leitura = null;
-
-		BufferedReader conversao = null;
-
-		try {
-			// Criar o arquivo "Produtos.txt" na pasta do projeto
-			arquivo = new FileOutputStream("Produtos.txt",true);
-
-			// Criação de 3 objetos da classe
-			Scanner sc = new Scanner(System.in);
-			
-			
-			System.out.println("Digite o nome do Produto:");
-			String nome = sc.next();
-			arquivo.write((nome+";").getBytes());
-			
-			System.out.println("Digite o preço:");
-			double preco = sc.nextDouble();
-			arquivo.write((preco+";").getBytes());
-			
-			System.out.println("Digite a quantidade:");
-			int quantidade = sc.nextInt();
-			arquivo.write((quantidade+";").getBytes());
-			
-			System.out.println("Digite o código:");
-			int codigo = sc.nextInt();
-			arquivo.write((codigo+";").getBytes());
-			
-			
-			Produto p = new Produto(nome, preco, quantidade, codigo);
-			
-
-			System.out.println("Objetos gravados com sucesso no arquivo.");
-              
-			// Início da leitura dos valores de dentro do arquivo
-			leitura = new FileInputStream("Produtos.txt");
-
-			// Utilização da classe InputStreamReader para recuperar todo o
-			// conteúdo escrito dentro do arquivo "agenda.txt"
-			// import java.io.InputStreamReader;
-			InputStreamReader todoConteudo = new InputStreamReader(leitura);
-
-			// Transformando "todoConteudo" do arquivo em um formato que é
-			// possível fazer a sua leitura na forma de String (texto)
-			// bem como é possível percorrer linha a linha. Isso é possível
-			// com a classe BufferedReader (criado no começo do código)
-			conversao = new BufferedReader(todoConteudo);
-
-			Scanner teclado = new Scanner(System.in);
-			System.out.println("Qual nome deseja buscar?");
-			 nome = sc.next();
-
-			// Criação de um objeto String para armazenar uma cópia do
-			// valor da linha caso encontre o nome pesquisado
-			String linhaCopia = ""; // Linha pode começar em branco para facilitar
-			// a conferência caso tenha encontrado ou não
-			
-			sc.close();
-			
-			// Utilização da repetição "while" que irá percorrer o arquivo
-			// enquanto houverem linhas para serem lidas
-			while (conversao.ready() == true) { // Enquanto houverem linhas
-				// Pegamos o valor da linha atual que está sendo lida
-				String linha = conversao.readLine();
+			System.out.println("Escolha uma das opções acima:");
+			opcao = nr.nextInt();
+			System.out.println();
+			  
+             
+			switch (opcao) {
+			case 1:
 				
-				// Verificar se (IF) nessa "linha" existe o "nome" procurado
-				// O método contains() indica se existe ou não o valor passado
-				// como parâmetro dentro do parênteses
-				if (linha.contains(nome)) {
-					// Se a linha contém o nome procurado, copiamos a linha
-					linhaCopia = linha;
-				} else {
-					// Caso não encontrou o nome informado
-					// System.out.println("O nome " + nome + " não foi achado." );
+				FileOutputStream arquivo = null;
+				// Criar o arquivo "Produtos.txt" na pasta do projeto
+				arquivo = new FileOutputStream("Produtos.txt", true);
+
+				// Criação de 3 objetos da classe
+				Scanner sc = new Scanner(System.in);
+
+				System.out.println("Digite o nome do Produto:");
+				String nome = sc.next();
+				
+
+				System.out.println("Digite o preço:");
+				double preco = sc.nextDouble();
+				
+
+				System.out.println("Digite a quantidade:");
+				int quantidade = sc.nextInt();
+				
+
+				System.out.println("Digite o código:");
+				int codigo = sc.nextInt();
+				
+				
+				
+				arquivo.write((nome + ";").getBytes());
+				arquivo.write((preco + ";").getBytes());
+				arquivo.write((quantidade + ";").getBytes());
+				arquivo.write((codigo + ";").getBytes());
+				arquivo.write(("\n").getBytes());
+				System.out.println("Objetos gravados com sucesso no arquivo.");
+
+				Produto tc = new Produto(nome, preco, quantidade, codigo);
+
+				sc.close();
+				
+				break;
+				
+			case 2:
+				
+				FileInputStream leitura = null;
+				BufferedReader convert = null;
+				leitura = new FileInputStream("Produtos.txt");
+
+				// Utilização da classe InputStreamReader para recuperar todo o
+				// conteúdo escrito dentro do arquivo "agenda.txt"
+				// import java.io.InputStreamReader;
+				InputStreamReader todo = new InputStreamReader(leitura);
+				
+				convert = new BufferedReader(todo);
+				
+
+
+				Scanner ler = new Scanner(System.in);
+				System.out.println("Qual nome deseja buscar?");
+				nome = ler.next();
+				
+				//Variável para ver em qual linha está o nome
+				int numeroLinha = 0;
+				
+				//Leitura de cada linha do arquivo
+				while(convert.ready()){
+					//Recuperar o valor da linha
+					String linha = convert.readLine();
+					
+					//Verificando se a linha possui o nome informado
+					if(linha.contains(nome)){
+						//Separa cada posição da linha em um vetor
+						String valores[] = linha.split(";");
+						
+						//Imprimindo os valores
+						System.out.println("Nome: " + valores[0]);
+						System.out.println("Preço: " + valores[1]);
+						System.out.println("Quantidade: " + valores[2]);
+						System.out.println("Código:" + valores[3]);
+					}else{
+						numeroLinha++;
+					}
 				}
-			}
+				break;
 
-			// Após percorrer todo o conteúdo do arquivo com o comando while
-			// verificamos o que tem dentro da "linhaCopia"
-			// Para comparar textos não é possível usar o == mas sim o método
-			// equals() e passar um texto (String)
-			if (linhaCopia.equals("")) {
-				// Se "linhaCopia" for igual (equals) ""
-				System.out.println("O nome " + nome + " não foi encontrado");
-			} else {
-				// Se "linhaCopia" não for igual a "", quer dizer que encontrou
-				System.out.println(linhaCopia);
+			case 3:
+				
+				FileInputStream arquivo1 = null;
+				//A classe BufferedReader é utilizada para recuperar o texto do arquivo e converter
+				//import java.io.BufferedReader;
+				BufferedReader textoConvertido = null;
+				
+				
+					//Comando para abrir o arquivo específico
+					arquivo1 = new FileInputStream("Produtos.txt");
 
-			}
-			// Fechar (liberar recurso) do objeto "sc" (Scanner)
-			teclado.close();
+					//Para ler o conteúdo de dentro do arquivo, precisamos usar o InputStreamReader
+					//import java.io.InputStreamReader;
+					InputStreamReader texto = new InputStreamReader(arquivo1);
+					
+					//Recuperar o texto e converter
+					textoConvertido = new BufferedReader(texto);
+					
+					//Utilização do comando "while" para percorrer o "textoConvertido" e verificar
+					//cada linha presente nele. Enquanto houverem linhas, será impresso o seu valor
+					//O método "ready" verifica se há uma linha nova ou não
+					while(textoConvertido.ready()) {
+						//Se há uma linha nova, então é impresso o valor da linha com o "readLine"
+						System.out.println(textoConvertido.readLine());
+					}
+				
+					arquivo1.close();
+					textoConvertido.close();
+				break;
 
-		} catch (FileNotFoundException e) {
-			System.out.println("Não foi possível criar o arquivo.");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Não foi possível escrever no arquivo.");
-			e.printStackTrace();
-		} finally {
+			case 4:
 
-			try {
-				arquivo.close();
-				leitura.close();
-				conversao.close();
-			} catch (IOException e) {
-				System.out.println("Não foi possível finalizar.");
-				e.printStackTrace();
+				break;
+
+			case 5:
+				System.out.println("Você decidiu sair.");
+				break;
+				
+
+			default:
+				System.out.println("Voce escolheu sair. ");
+				
+				break;
 				
 			}
-		}
+
+		} while (opcao != 5);
+
 	}
 
 }
