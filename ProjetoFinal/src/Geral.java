@@ -5,11 +5,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Geral {
 
-	public static void main(String[] args) throws IOException {
+	public static <Atualizar> void main(String[] args) throws IOException {
 		int opcao = 0;
 		Scanner nr = new Scanner(System.in);
 		Produto p = new Produto();
@@ -101,6 +105,7 @@ public class Geral {
 					if(linha.contains(nome)){
 						//Separa cada posição da linha em um vetor
 						String valores[] = linha.split(";");
+				
 						
 						//Imprimindo os valores
 						System.out.println("Nome: " + valores[0]);
@@ -145,6 +150,68 @@ public class Geral {
 
 			case 4:
 
+				
+				FileInputStream leitura1 = null;
+				BufferedReader convert1 = null;
+				
+
+				// Utilização da classe InputStreamReader para recuperar todo o
+				// conteúdo escrito dentro do arquivo "agenda.txt"
+				// import java.io.InputStreamReader;
+				leitura1 = new FileInputStream("Produtos.txt");
+                InputStreamReader todo1 = new InputStreamReader(leitura1);
+				
+				convert1 = new BufferedReader(todo1);
+				
+
+
+				Scanner ler1 = new Scanner(System.in);
+				System.out.println("Digite o Código:");
+				codigo = ler1.nextInt();
+				
+				//Variável para ver em qual linha está o nome
+				int numeroLinha1 = 0;
+				
+				List<String> listaNovo1 = new ArrayList<String>();
+				
+				//Leitura de cada linha do arquivo
+				while(convert1.ready()){
+					//Recuperar o valor da linha
+					String linha = convert1.readLine();
+					
+					//Verificando se a linha possui o nome informado
+					if(linha.contains(""+codigo)){
+						//Separa cada posição da linha em um vetor
+						
+						Scanner tc1 = new Scanner(System.in);
+						
+						System.out.println("Digite o nome do Produto:");
+						String nomeAtualizado = tc1.next();
+						
+
+						System.out.println("Digite o preço:");
+						double precoAtualizado = tc1.nextDouble();
+						
+
+						System.out.println("Digite a quantidade:");
+						int quantidadeAtualizado = tc1.nextInt();
+						
+						
+						String linhaAtualizado = codigo +";"+ nomeAtualizado +";"+ precoAtualizado+";"+quantidadeAtualizado;  
+					
+					linha = linhaAtualizado;
+					}
+					listaNovo1.add(linha);
+					
+				}
+				arquivo = new FileOutputStream("Produtos.txt");
+				
+				for(String cadaLinha : listaNovo1) {
+					
+					 
+				}
+				System.out.println("Produtos Atualizados.");
+				
 				break;
 
 			case 5:
